@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tambah Destinasi"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/travl_blue"
+            android:layout_marginBottom="24dp"/>
+
+        <EditText
+            android:id="@+id/etDestName"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Nama Destinasi"
+            android:background="@drawable/search_bar_bg"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/etDestLocation"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Lokasi"
+            android:background="@drawable/search_bar_bg"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/etDestPrice"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Harga Tiket"
+            android:inputType="numberDecimal"
+            android:background="@drawable/search_bar_bg"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/etDestCategory"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Kategori (Pantai/Gunung/dll)"
+            android:background="@drawable/search_bar_bg"
+            android:paddingHorizontal="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/etDestDescription"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:hint="Deskripsi Destinasi"
+            android:gravity="top"
+            android:padding="16dp"
+            android:background="@drawable/search_bar_bg"
+            android:layout_marginBottom="24dp"/>
+
+        <Button
+            android:id="@+id/btnSaveDest"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Simpan Destinasi"
+            android:backgroundTint="@color/travl_blue"/>
+
+    </LinearLayout>
+</ScrollView>

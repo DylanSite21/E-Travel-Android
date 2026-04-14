@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Base application theme. -->
+    <style name="Theme.ETicketing" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/travl_blue</item>
+        <item name="colorPrimaryDark">@color/travl_blue_dark</item>
+        <item name="colorAccent">@color/travl_blue</item>
 
-    <style name="Theme.ETicketing" parent="android:Theme.Material.Light.NoActionBar" />
+        <!-- Customize your theme here. -->
+        <item name="android:statusBarColor">@color/travl_blue_dark</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
 </resources>
