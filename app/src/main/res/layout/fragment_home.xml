@@ -77,7 +77,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Temukan Pesona alam, budaya, dan kuliner..."
-                    android:textColor="#DD050505"
+                    android:textColor="#DD000000"
                     android:textSize="12sp"
                     android:gravity="center"
                     android:layout_marginTop="8dp"/>
@@ -87,7 +87,7 @@
                     android:layout_height="55dp"
                     android:text="Jelajahi Destinasi"
                     android:textAllCaps="false"
-                    android:backgroundTint="@color/travl_blue"
+                    android:backgroundTint="@color/red_exit"
                     android:layout_marginTop="8dp"
                     android:textSize="12sp"/>
             </LinearLayout>
@@ -150,13 +150,6 @@
                         android:padding="16dp"
                         android:orientation="horizontal">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:text=" BROMO "
-                            android:textColor="@color/travl_blue"
-                            android:textStyle="bold" />
                     </LinearLayout>
                 </FrameLayout>
             </androidx.cardview.widget.CardView>
