@@ -1,39 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
-        android:dataExtractionRules="@xml/data_extraction_rules"
-        android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
-        android:label="Travl"
+        android:label="ETicketing"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.ETicketing">
+        android:theme="@style/Theme.ETicketing"> <!-- Tema Utama -->
 
+        <!-- Launcher: LoginActivity sekarang di package .activities -->
         <activity
-            android:name=".LoginActivity"
-            android:exported="true"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+            android:name=".activities.LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".RegisterActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <!-- Daftarkan semua Activity lainnya dengan package yang benar -->
+        <activity android:name=".activities.RegisterActivity" />
+        <activity android:name=".activities.AdminActivity" />
+        <activity android:name=".activities.PengelolaActivity" />
+        <activity android:name=".activities.MainActivity" />
 
-        <activity
-            android:name=".AddDestinationActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.ETicketing" />
     </application>
-
 </manifest>

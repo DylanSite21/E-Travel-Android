@@ -1,4 +1,4 @@
-package com.example.eticketing
+package Fragments
 
 import android.content.Context
 import android.content.Intent
@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.eticketing.AddDestinationActivity
+import com.example.eticketing.adapters.DestinationAdapter
 import com.example.eticketing.data.AppDatabase
 import com.example.eticketing.data.Ticket
 import com.example.eticketing.databinding.FragmentDestinationsBinding
@@ -32,7 +34,7 @@ class DestinationsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        db = AppDatabase.getDatabase(requireContext())
+        db = AppDatabase.Companion.getDatabase(requireContext())
 
         val sharedPref = requireActivity().getSharedPreferences("user_prefs", Context.MODE_PRIVATE)
         val role = sharedPref.getString("role", "USER")
@@ -60,7 +62,11 @@ class DestinationsFragment : Fragment() {
                             status = "CONFIRMED"
                         )
                         db.ticketDao().bookTicket(ticket)
-                        Toast.makeText(requireContext(), "Tiket untuk ${destination.name} berhasil dipesan!", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Tiket untuk ${destination.name} berhasil dipesan!",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
             },

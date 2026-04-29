@@ -1,4 +1,4 @@
-package com.example.eticketing
+package Fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
