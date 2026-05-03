@@ -3,16 +3,16 @@ package com.example.eticketing.activities
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.example.eticketing.R
 import com.example.eticketing.data.AppDatabase
 import com.example.eticketing.data.User
 import com.example.eticketing.databinding.ActivityRegisterBinding
-// IMPORT R SECARA MANUAL
-import com.example.eticketing.R
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
-class RegisterActivity : AppCompatActivity() {
+class RegisterActivity : BaseActivity() {
 
     private lateinit var binding: ActivityRegisterBinding
 
@@ -24,20 +24,18 @@ class RegisterActivity : AppCompatActivity() {
         val db = AppDatabase.getDatabase(this)
         val userDao = db.userDao()
 
-        binding.btnDaftar.setOnClickListener {
-            val nama = binding.etNama.text.toString().trim()
+        binding.btnRegister.setOnClickListener {
+            val nama = binding.etName.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
 
-            // Tentukan role dari RadioGroup
             val role = when (binding.rgRole.checkedRadioButtonId) {
                 R.id.rbPengelola -> "pengelola"
                 else -> "user"
             }
 
-            // Validasi input
             if (nama.isEmpty()) {
-                binding.etNama.error = "Nama tidak boleh kosong"
+                binding.etName.error = "Nama tidak boleh kosong"
                 return@setOnClickListener
             }
             if (email.isEmpty() || !android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -50,26 +48,34 @@ class RegisterActivity : AppCompatActivity() {
             }
 
             lifecycleScope.launch {
-                // Cek email sudah terdaftar
-                val existing = userDao.getUserByEmail(email)
+                val existing = withContext(Dispatchers.IO) {
+                    userDao.getUserByEmail(email)
+                }
+
                 if (existing != null) {
-                    runOnUiThread {
+                    withContext(Dispatchers.Main) {
                         binding.etEmail.error = "Email sudah terdaftar"
-                        Toast.makeText(this@RegisterActivity, "Email sudah digunakan", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this@RegisterActivity,
+                            "Email sudah digunakan",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                     return@launch
                 }
 
-                // Simpan user baru
-                val newUser = User(
-                    nama = nama,
-                    email = email,
-                    password = password,
-                    role = role
-                )
-                userDao.register(newUser)
+                withContext(Dispatchers.IO) {
+                    userDao.register(
+                        User(
+                            nama = nama,
+                            email = email,
+                            password = password,
+                            role = role
+                        )
+                    )
+                }
 
-                runOnUiThread {
+                withContext(Dispatchers.Main) {
                     Toast.makeText(
                         this@RegisterActivity,
                         "Akun berhasil dibuat! Silakan login.",
@@ -81,9 +87,6 @@ class RegisterActivity : AppCompatActivity() {
             }
         }
 
-        // Link kembali ke login
-        binding.tvLogin.setOnClickListener {
-            finish()
-        }
+        binding.tvLogin.setOnClickListener { finish() }
     }
 }

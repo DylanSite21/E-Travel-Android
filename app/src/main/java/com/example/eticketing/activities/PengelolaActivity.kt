@@ -2,44 +2,37 @@ package com.example.eticketing.activities
 
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Button
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import com.example.eticketing.data.SessionManager
+import com.example.eticketing.databinding.ActivityPengelolaBinding
 
-// PengelolaActivity: Dashboard untuk role "pengelola"
-// Tahap berikutnya akan diisi dengan: tambah/edit/hapus destinasi, kelola tiket, dll.
-class PengelolaActivity : AppCompatActivity() {
+class PengelolaActivity : BaseActivity() {
+
+    private lateinit var binding: ActivityPengelolaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityPengelolaBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val layout = android.widget.LinearLayout(this).apply {
-            orientation = android.widget.LinearLayout.VERTICAL
-            gravity = android.view.Gravity.CENTER
-            setPadding(64, 64, 64, 64)
+        val nama = SessionManager.getUserName(this)
+        val pengelolaId = SessionManager.getUserId(this)
+
+        binding.tvWelcomePengelola.text = "Selamat Datang, $nama 🏢"
+
+        binding.cardDestinasiSaya.setOnClickListener {
+            val intent = Intent(this, DestinasiSayaActivity::class.java)
+            intent.putExtra("pengelolaId", pengelolaId)
+            startActivity(intent)
         }
 
-        val prefs = getSharedPreferences("session", MODE_PRIVATE)
-        val nama = prefs.getString("userName", "Pengelola")
-
-        val tvWelcome = TextView(this).apply {
-            text = "🏨 Selamat datang, $nama!\nRole: Pengelola"
-            textSize = 20f
-            gravity = android.view.Gravity.CENTER
+        binding.cardTiketSaya.setOnClickListener {
+            val intent = Intent(this, TiketPengelolaActivity::class.java)
+            intent.putExtra("pengelolaId", pengelolaId)
+            startActivity(intent)
         }
 
-        val btnLogout = Button(this).apply {
-            text = "Logout"
-            setOnClickListener {
-                getSharedPreferences("session", MODE_PRIVATE).edit().clear().apply()
-                startActivity(Intent(this@PengelolaActivity, LoginActivity::class.java).apply {
-                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                })
-            }
+        binding.btnLogoutPengelola.setOnClickListener {
+            SessionManager.logout(this, LoginActivity::class.java)
         }
-
-        layout.addView(tvWelcome)
-        layout.addView(btnLogout)
-        setContentView(layout)
     }
 }
