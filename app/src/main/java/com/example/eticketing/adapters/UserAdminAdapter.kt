@@ -1,6 +1,7 @@
 package com.example.eticketing.adapters
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -9,7 +10,7 @@ import com.example.eticketing.data.User
 import com.example.eticketing.databinding.ItemUserAdminBinding
 
 class UserAdminAdapter(
-    private val onDelete: (User) -> Unit
+    private val onDelete: (User) -> Unit = {}
 ) : ListAdapter<User, UserAdminAdapter.ViewHolder>(DiffCallback()) {
 
     inner class ViewHolder(private val binding: ItemUserAdminBinding) :
@@ -20,15 +21,21 @@ class UserAdminAdapter(
             binding.tvUserEmail.text = user.email
             binding.tvUserRole.text = "Role: ${user.role.replaceFirstChar { it.uppercase() }}"
 
-            // Sembunyikan tombol hapus untuk admin
-            if (user.role == "admin") {
-                binding.btnHapusUser.isEnabled = false
-                binding.btnHapusUser.alpha = 0.3f
+            // Tampilkan status request jika ada
+            if (user.statusRequest != "none") {
+                binding.tvStatusRequest.visibility = View.VISIBLE
+                binding.tvStatusRequest.text = when (user.statusRequest) {
+                    "pending" -> "⏳ Menunggu approval pengelola"
+                    "approved" -> "✅ Pengelola disetujui"
+                    "rejected" -> "❌ Ditolak"
+                    else -> ""
+                }
             } else {
-                binding.btnHapusUser.isEnabled = true
-                binding.btnHapusUser.alpha = 1f
-                binding.btnHapusUser.setOnClickListener { onDelete(user) }
+                binding.tvStatusRequest.visibility = View.GONE
             }
+
+            // Sembunyikan tombol hapus sepenuhnya (admin read only)
+            binding.btnHapusUser.visibility = View.GONE
         }
     }
 

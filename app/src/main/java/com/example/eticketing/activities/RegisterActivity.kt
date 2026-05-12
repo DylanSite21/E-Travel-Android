@@ -2,10 +2,12 @@ package com.example.eticketing.activities
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View // Wajib ditambahkan agar View.VISIBLE/GONE berfungsi
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import com.example.eticketing.R
 import com.example.eticketing.data.AppDatabase
+import com.example.eticketing.data.PengelolaRequest
 import com.example.eticketing.data.User
 import com.example.eticketing.databinding.ActivityRegisterBinding
 import kotlinx.coroutines.Dispatchers
@@ -28,11 +30,10 @@ class RegisterActivity : BaseActivity() {
             val nama = binding.etName.text.toString().trim()
             val email = binding.etEmail.text.toString().trim()
             val password = binding.etPassword.text.toString().trim()
+            val whatsapp = binding.etWhatsappRegister.text.toString().trim()
 
-            val role = when (binding.rgRole.checkedRadioButtonId) {
-                R.id.rbPengelola -> "pengelola"
-                else -> "user"
-            }
+            // Cek apakah pilih pengelola
+            val wantsPengelola = binding.rgRole.checkedRadioButtonId == R.id.rbPengelola
 
             if (nama.isEmpty()) {
                 binding.etName.error = "Nama tidak boleh kosong"
@@ -48,39 +49,58 @@ class RegisterActivity : BaseActivity() {
             }
 
             lifecycleScope.launch {
-                val existing = withContext(Dispatchers.IO) {
-                    userDao.getUserByEmail(email)
-                }
+                val existing = withContext(Dispatchers.IO) { userDao.getUserByEmail(email) }
 
                 if (existing != null) {
                     withContext(Dispatchers.Main) {
                         binding.etEmail.error = "Email sudah terdaftar"
-                        Toast.makeText(
-                            this@RegisterActivity,
-                            "Email sudah digunakan",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(this@RegisterActivity, "Email sudah digunakan", Toast.LENGTH_SHORT).show()
                     }
                     return@launch
                 }
 
+                // Semua user baru selalu role "user" dulu
+                val newUser = User(
+                    nama = nama,
+                    email = email,
+                    password = password,
+                    whatsapp = if (whatsapp.isNotEmpty()) whatsapp else null,
+                    role = "user",
+                    statusRequest = if (wantsPengelola) "pending" else "none"
+                )
+
                 withContext(Dispatchers.IO) {
-                    userDao.register(
-                        User(
-                            nama = nama,
-                            email = email,
-                            password = password,
-                            role = role
-                        )
-                    )
+                    userDao.register(newUser)
+
+                    if (wantsPengelola) {
+                        val savedUser = userDao.getUserByEmail(email)
+                        savedUser?.let {
+                            db.pengelolaRequestDao().insert(
+                                PengelolaRequest(
+                                    userId = it.id,
+                                    timestamp = System.currentTimeMillis()
+                                )
+                            )
+
+                            db.messageDao().sendMessage(
+                                com.example.eticketing.data.Message(
+                                    senderId = it.id,
+                                    receiverId = 1L, // admin
+                                    content = "Ada permintaan baru untuk menjadi pengelola dari ${it.nama}",
+                                    type = "notification"
+                                )
+                            )
+                        }
+                    }
                 }
 
                 withContext(Dispatchers.Main) {
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "Akun berhasil dibuat! Silakan login.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    val msg = if (wantsPengelola)
+                        "Akun berhasil dibuat! Permintaan pengelola Anda sedang menunggu persetujuan admin. Anda dapat login sebagai user sementara."
+                    else
+                        "Akun berhasil dibuat! Silakan login."
+
+                    Toast.makeText(this@RegisterActivity, msg, Toast.LENGTH_LONG).show()
                     startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                     finish()
                 }
@@ -88,5 +108,11 @@ class RegisterActivity : BaseActivity() {
         }
 
         binding.tvLogin.setOnClickListener { finish() }
+
+        // --- TAMBAHAN LOGIKA SHOW/HIDE INFO PENGELOLA ---
+        binding.rgRole.setOnCheckedChangeListener { _, checkedId ->
+            binding.tvInfoPengelola.visibility =
+                if (checkedId == R.id.rbPengelola) View.VISIBLE else View.GONE
+        }
     }
 }

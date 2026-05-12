@@ -1,7 +1,6 @@
 package com.example.eticketing.activities
 
 import android.os.Bundle
-import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.eticketing.adapters.UserAdminAdapter
@@ -23,25 +22,9 @@ class KelolaUserActivity : BaseActivity() {
         setupBackButton("Kelola User")
 
         val db = AppDatabase.getDatabase(this)
-        val userDao = db.userDao()
 
-        adapter = UserAdminAdapter(
-            onDelete = { user ->
-                AlertDialog.Builder(this)
-                    .setTitle("Hapus User")
-                    .setMessage("Yakin ingin menghapus user \"${user.nama}\"?")
-                    .setPositiveButton("Hapus") { _, _ ->
-                        lifecycleScope.launch {
-                            withContext(Dispatchers.IO) {
-                                userDao.deleteUser(user.id)
-                            }
-                            loadUsers()
-                        }
-                    }
-                    .setNegativeButton("Batal", null)
-                    .show()
-            }
-        )
+        // Admin hanya bisa lihat — onDelete dikosongkan
+        adapter = UserAdminAdapter(onDelete = {})
 
         binding.rvUser.layoutManager = LinearLayoutManager(this)
         binding.rvUser.adapter = adapter

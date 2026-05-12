@@ -45,6 +45,9 @@
         <activity android:name=".activities.AdminBrowseActivity" android:exported="false" android:theme="@style/Theme.Eticketing.NoActionBar"/>
         <!-- Step 16: Tambah KategoriActivity -->
         <activity android:name=".activities.KategoriActivity" android:exported="false" android:theme="@style/Theme.Eticketing.NoActionBar"/>
-
+        <activity android:name=".activities.ProfilActivity" android:exported="false" android:theme="@style/Theme.Eticketing.NoActionBar"/>
+        <activity android:name=".activities.RequestPengelolaActivity" android:exported="false" android:theme="@style/Theme.Eticketing.NoActionBar"/>
+        <activity android:name=".activities.ChatListActivity" android:exported="false" android:theme="@style/Theme.Eticketing.NoActionBar"/>
+        <activity android:name=".activities.ChatActivity" android:exported="false" android:theme="@style/Theme.Eticketing.NoActionBar"/>
     </application>
 </manifest>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ETicketing</string>
+    <string name="drawer_open">Buka Menu</string>
+    <string name="drawer_close">Tutup Menu</string>
 </resources>
