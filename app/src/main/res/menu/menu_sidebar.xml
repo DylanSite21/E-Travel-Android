@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item
+            android:id="@+id/nav_side_home"
+            android:icon="@android:drawable/ic_menu_compass"
+            android:title="Home"/>
+
+        <item
+            android:id="@+id/nav_side_destinasi"
+            android:icon="@android:drawable/ic_menu_search"
+            android:title="Destinasi"/>
+
+        <item
+            android:id="@+id/nav_side_pesan"
+            android:icon="@android:drawable/ic_dialog_email"
+            android:title="Pesan"/>
+
+        <item
+            android:id="@+id/nav_side_profil"
+            android:icon="@android:drawable/ic_menu_myplaces"
+            android:title="Profil"/>
+
+        <item
+            android:id="@+id/nav_side_kelola"
+            android:icon="@android:drawable/ic_menu_manage"
+            android:title="Kelola"/>
+
+        <item
+            android:id="@+id/nav_side_request"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Request Pengelola"/>
+
+        <item
+            android:id="@+id/nav_side_destinasi_saya"
+            android:icon="@android:drawable/ic_menu_edit"
+            android:title="Destinasi Saya"/>
+
+        <item
+            android:id="@+id/nav_side_kelola_tiket"
+            android:icon="@android:drawable/ic_menu_agenda"
+            android:title="Kelola Tiket"/>
+
+    </group>
+
+    <item
+        android:id="@+id/nav_side_logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="Logout"/>
+
+</menu>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <!-- Foto Profil -->
+        <FrameLayout
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginBottom="8dp">
+
+            <ImageView
+                android:id="@+id/ivFotoProfil"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@android:drawable/ic_menu_camera"
+                android:background="#E0E0E0"
+                android:padding="24dp"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                android:text="✏️"
+                android:textSize="20sp"
+                android:background="#1565C0"
+                android:padding="4dp"/>
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/btnGantiFoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ganti Foto"
+            android:backgroundTint="#E3F2FD"
+            android:textColor="#1565C0"
+            android:textSize="13sp"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Info -->
+        <TextView
+            android:id="@+id/tvNama"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:textColor="#1A1A1A"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tvEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:id="@+id/tvRole"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:textColor="#FFFFFF"
+            android:background="#1565C0"
+            android:paddingHorizontal="16dp"
+            android:paddingVertical="6dp"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Nomor WhatsApp -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nomor WhatsApp"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:textColor="#1A1A1A"
+            android:layout_marginBottom="6dp"/>
+
+        <EditText
+            android:id="@+id/etWhatsapp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Contoh: 08123456789"
+            android:textColorHint="#AAAAAA"
+            android:textColor="#1A1A1A"
+            android:background="@drawable/bg_edittext"
+            android:padding="14dp"
+            android:layout_marginBottom="8dp"
+            android:inputType="phone"/>
+
+        <Button
+            android:id="@+id/btnSimpanWa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Simpan Nomor WA"
+            android:backgroundTint="#1565C0"
+            android:textColor="#FFFFFF"
+            android:layout_marginBottom="32dp"/>
+
+        <Button
+            android:id="@+id/btnLogout"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="LOGOUT"
+            android:backgroundTint="#E53935"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"/>
+
+    </LinearLayout>
+</ScrollView>

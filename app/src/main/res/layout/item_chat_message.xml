@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="4dp">
+
+    <!-- Pesan saya (kanan) -->
+    <LinearLayout
+        android:id="@+id/layoutSaya"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="end">
+
+        <TextView
+            android:id="@+id/tvPesanSaya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="260dp"
+            android:background="#1565C0"
+            android:textColor="#FFFFFF"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:layout_marginBottom="2dp"/>
+
+        <TextView
+            android:id="@+id/tvWaktuSaya"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#AAAAAA"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+
+    <!-- Pesan lawan (kiri) -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="start">
+
+        <TextView
+            android:id="@+id/tvPesanLawan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxWidth="260dp"
+            android:background="#FFFFFF"
+            android:textColor="#1A1A1A"
+            android:padding="10dp"
+            android:textSize="14sp"
+            android:layout_marginBottom="2dp"/>
+
+        <TextView
+            android:id="@+id/tvWaktuLawan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="10sp"
+            android:textColor="#AAAAAA"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+
+</LinearLayout>

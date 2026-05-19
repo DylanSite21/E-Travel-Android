@@ -30,122 +30,85 @@
             android:textColor="#888888"
             android:layout_marginBottom="32dp"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Nama Lengkap"
-            android:textColor="#1A1A1A"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:layout_marginBottom="6dp"/>
+        <!-- Nama -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Nama Lengkap" android:textColor="#1A1A1A" android:textStyle="bold"
+            android:textSize="14sp" android:layout_marginBottom="6dp"/>
+        <EditText android:id="@+id/etName" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:hint="Masukkan nama lengkap"
+            android:textColorHint="#AAAAAA" android:textColor="#1A1A1A"
+            android:background="@drawable/bg_edittext" android:padding="14dp"
+            android:layout_marginBottom="16dp" android:inputType="textPersonName"/>
 
-        <EditText
-            android:id="@+id/etName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Masukkan nama lengkap"
-            android:textColorHint="#AAAAAA"
-            android:textColor="#1A1A1A"
-            android:background="@drawable/bg_edittext"
-            android:padding="14dp"
-            android:layout_marginBottom="16dp"
-            android:inputType="textPersonName"/>
+        <!-- Email -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Email" android:textColor="#1A1A1A" android:textStyle="bold"
+            android:textSize="14sp" android:layout_marginBottom="6dp"/>
+        <EditText android:id="@+id/etEmail" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:hint="contoh@email.com"
+            android:textColorHint="#AAAAAA" android:textColor="#1A1A1A"
+            android:background="@drawable/bg_edittext" android:padding="14dp"
+            android:layout_marginBottom="16dp" android:inputType="textEmailAddress"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Email"
-            android:textColor="#1A1A1A"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:layout_marginBottom="6dp"/>
+        <!-- Password -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Password" android:textColor="#1A1A1A" android:textStyle="bold"
+            android:textSize="14sp" android:layout_marginBottom="6dp"/>
+        <EditText android:id="@+id/etPassword" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:hint="Minimal 6 karakter"
+            android:textColorHint="#AAAAAA" android:textColor="#1A1A1A"
+            android:background="@drawable/bg_edittext" android:padding="14dp"
+            android:layout_marginBottom="16dp" android:inputType="textPassword"/>
 
-        <EditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="contoh@email.com"
-            android:textColorHint="#AAAAAA"
-            android:textColor="#1A1A1A"
-            android:background="@drawable/bg_edittext"
-            android:padding="14dp"
-            android:layout_marginBottom="16dp"
-            android:inputType="textEmailAddress"/>
+        <!-- WhatsApp (opsional) -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Nomor WhatsApp (Opsional)" android:textColor="#1A1A1A"
+            android:textStyle="bold" android:textSize="14sp" android:layout_marginBottom="6dp"/>
+        <EditText android:id="@+id/etWhatsappRegister" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:hint="Contoh: 08123456789"
+            android:textColorHint="#AAAAAA" android:textColor="#1A1A1A"
+            android:background="@drawable/bg_edittext" android:padding="14dp"
+            android:layout_marginBottom="16dp" android:inputType="phone"/>
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Password"
-            android:textColor="#1A1A1A"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:layout_marginBottom="6dp"/>
+        <!-- Role -->
+        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+            android:text="Daftar sebagai:" android:textColor="#1A1A1A" android:textStyle="bold"
+            android:textSize="14sp" android:layout_marginBottom="8dp"/>
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Minimal 6 karakter"
-            android:textColorHint="#AAAAAA"
-            android:textColor="#1A1A1A"
-            android:background="@drawable/bg_edittext"
-            android:padding="14dp"
-            android:layout_marginBottom="16dp"
-            android:inputType="textPassword"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Daftar sebagai:"
-            android:textColor="#1A1A1A"
-            android:textStyle="bold"
-            android:textSize="14sp"
-            android:layout_marginBottom="8dp"/>
-
-        <RadioGroup
-            android:id="@+id/rgRole"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="24dp">
-            <RadioButton
-                android:id="@+id/rbUser"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="User"
-                android:textColor="#1A1A1A"
-                android:checked="true"/>
-            <RadioButton
-                android:id="@+id/rbPengelola"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Pengelola"
-                android:textColor="#1A1A1A"/>
+        <RadioGroup android:id="@+id/rgRole" android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            <RadioButton android:id="@+id/rbUser" android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_weight="1"
+                android:text="User" android:textColor="#1A1A1A" android:checked="true"/>
+            <RadioButton android:id="@+id/rbPengelola" android:layout_width="0dp"
+                android:layout_height="wrap_content" android:layout_weight="1"
+                android:text="Pengelola" android:textColor="#1A1A1A"/>
         </RadioGroup>
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:text="DAFTAR"
-            android:backgroundTint="#1565C0"
-            android:textColor="#FFFFFF"
-            android:textSize="16sp"
-            android:layout_marginBottom="16dp"/>
-
+        <!-- Info jika pilih pengelola -->
         <TextView
-            android:id="@+id/tvLogin"
-            android:layout_width="wrap_content"
+            android:id="@+id/tvInfoPengelola"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Sudah punya akun? Masuk di sini"
-            android:textColor="#1565C0"
-            android:textStyle="bold"
-            android:padding="8dp"
-            android:clickable="true"
-            android:focusable="true"/>
+            android:text="⚠️ Akun pengelola memerlukan persetujuan admin. Anda akan login sebagai user biasa terlebih dahulu."
+            android:textSize="12sp"
+            android:textColor="#FF6F00"
+            android:background="#FFF3E0"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"/>
+
+        <Button android:id="@+id/btnRegister" android:layout_width="match_parent"
+            android:layout_height="56dp" android:text="DAFTAR"
+            android:backgroundTint="#1565C0" android:textColor="#FFFFFF"
+            android:textSize="16sp" android:layout_marginBottom="16dp"/>
+
+        <TextView android:id="@+id/tvLogin" android:layout_width="wrap_content"
+            android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+            android:text="Sudah punya akun? Masuk di sini" android:textColor="#1565C0"
+            android:textStyle="bold" android:padding="8dp"
+            android:clickable="true" android:focusable="true"/>
 
     </LinearLayout>
 </ScrollView>

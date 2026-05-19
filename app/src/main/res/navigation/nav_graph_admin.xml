@@ -3,30 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph_admin"
     app:startDestination="@id/nav_home">
-
-    <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.eticketing.fragments.HomeFragment"
-        android:label="Home"/>
-
-    <fragment
-        android:id="@+id/nav_destinasi"
-        android:name="com.example.eticketing.fragments.DestinationsFragment"
-        android:label="Destinasi"/>
-
-    <fragment
-        android:id="@+id/nav_tiket"
-        android:name="com.example.eticketing.fragments.TicketsFragment"
-        android:label="Tiket Saya"/>
-
-    <fragment
-        android:id="@+id/nav_kelola"
-        android:name="com.example.eticketing.fragments.KelolaFragment"
-        android:label="Kelola"/>
-
-    <fragment
-        android:id="@+id/nav_profil"
-        android:name="com.example.eticketing.fragments.ProfilFragment"
-        android:label="Profil"/>
-
+    <fragment android:id="@+id/nav_home"
+        android:name="com.example.eticketing.fragments.HomeFragment" android:label="Home"/>
+    <fragment android:id="@+id/nav_destinasi"
+        android:name="com.example.eticketing.fragments.DestinationsFragment" android:label="Destinasi"/>
+    <fragment android:id="@+id/nav_tiket"
+        android:name="com.example.eticketing.fragments.TicketsFragment" android:label="Tiket Saya"/>
+    <fragment android:id="@+id/nav_pesan"
+        android:name="com.example.eticketing.fragments.PesanFragment" android:label="Pesan"/>
+    <fragment android:id="@+id/nav_kelola"
+        android:name="com.example.eticketing.fragments.KelolaFragment" android:label="Kelola"/>
 </navigation>

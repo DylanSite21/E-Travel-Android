@@ -11,8 +11,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Database(
-    entities = [User::class, Destination::class, Ticket::class, Category::class],
-    version = 4,
+    entities = [User::class, Destination::class, Ticket::class, Category::class,
+        Message::class, PengelolaRequest::class],
+    version = 5,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -21,6 +22,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun destinationDao(): DestinationDao
     abstract fun ticketDao(): TicketDao
     abstract fun categoryDao(): CategoryDao
+    abstract fun messageDao(): MessageDao
+    abstract fun pengelolaRequestDao(): PengelolaRequestDao
 
     companion object {
         @Volatile
@@ -59,10 +62,44 @@ abstract class AppDatabase : RoomDatabase() {
                         emoji TEXT NOT NULL DEFAULT '🏷️'
                     )
                 """.trimIndent())
-                // Seed kategori default
                 db.execSQL("INSERT INTO categories (name, emoji) VALUES ('Pantai', '🏖️')")
                 db.execSQL("INSERT INTO categories (name, emoji) VALUES ('Gunung', '⛰️')")
                 db.execSQL("INSERT INTO categories (name, emoji) VALUES ('Kota', '🏙️')")
+            }
+        }
+
+        // Migration v4 → v5: tambah kolom baru di users,
+        // tambah tabel messages dan pengelola_requests
+        val MIGRATION_4_5 = object : Migration(4, 5) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+
+                // Tambah kolom baru di tabel users
+                db.execSQL("ALTER TABLE users ADD COLUMN photoPath TEXT")
+                db.execSQL("ALTER TABLE users ADD COLUMN whatsapp TEXT")
+                db.execSQL("ALTER TABLE users ADD COLUMN statusRequest TEXT NOT NULL DEFAULT 'none'")
+
+                // Buat tabel messages
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS messages (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        senderId INTEGER NOT NULL,
+                        receiverId INTEGER NOT NULL,
+                        content TEXT NOT NULL,
+                        timestamp INTEGER NOT NULL,
+                        isRead INTEGER NOT NULL DEFAULT 0,
+                        type TEXT NOT NULL DEFAULT 'chat'
+                    )
+                """.trimIndent())
+
+                // Buat tabel pengelola_requests
+                db.execSQL("""
+                    CREATE TABLE IF NOT EXISTS pengelola_requests (
+                        id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+                        userId INTEGER NOT NULL,
+                        status TEXT NOT NULL DEFAULT 'pending',
+                        timestamp INTEGER NOT NULL
+                    )
+                """.trimIndent())
             }
         }
 
@@ -73,7 +110,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "etravel_database"
                 )
-                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4)
+                    .addMigrations(MIGRATION_1_2, MIGRATION_2_3, MIGRATION_3_4, MIGRATION_4_5)
                     .addCallback(object : Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)
@@ -86,7 +123,6 @@ abstract class AppDatabase : RoomDatabase() {
                                         role = "admin"
                                     )
                                 )
-                                // Seed kategori default
                                 INSTANCE?.categoryDao()?.insert(Category(name = "Pantai", emoji = "🏖️"))
                                 INSTANCE?.categoryDao()?.insert(Category(name = "Gunung", emoji = "⛰️"))
                                 INSTANCE?.categoryDao()?.insert(Category(name = "Kota", emoji = "🏙️"))

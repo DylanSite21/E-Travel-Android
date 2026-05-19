@@ -10,5 +10,8 @@ data class User(
     val nama: String,
     val email: String,
     val password: String,
-    val role: String = "user"
+    val role: String = "user",
+    val photoPath: String? = null,        // foto profil
+    val whatsapp: String? = null,         // nomor WhatsApp
+    val statusRequest: String = "none"    // none/pending/approved/rejected
 )
